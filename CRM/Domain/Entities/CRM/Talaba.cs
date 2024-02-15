@@ -2,13 +2,15 @@
 
 namespace Domain.Entities.CRM;
 
-public class Teacher : BaseEntity
+public class Talaba : BaseEntity
 {
     [Required, StringLength(100)]
     public string FirstName { get; set; } = string.Empty;
     [Required, StringLength(100)]
-    public string LastName { get; set; } = string.Empty ;
+    public string LastName { get; set; } = string.Empty;
     [Required, StringLength(100)]
     public string PhoneNumber { get; set; } = string.Empty;
-    public List<TeacherFan>? TeacherFans { get; set; } 
+    public List<TalabaGuruh>? TalabaGuruhs { get; set;}
+    public List<TalabaTolov>? TalabaTolov { get; set; }
+    public List<TalabaGuruhDavomat>? TalabaGuruhDavomats { get; set; }
 }
