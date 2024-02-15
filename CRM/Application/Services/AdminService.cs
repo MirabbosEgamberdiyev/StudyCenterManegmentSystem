@@ -9,12 +9,14 @@ using Microsoft.Extensions.Configuration;
 
 namespace Application.Services;
 
-public class IdentityService(UserManager<ApplicationUser> userManager,
-                             IConfiguration configuration)
-    : IIdentityService
+public class AdminService(UserManager<ApplicationUser> userManager,
+                                 IConfiguration configuration) : IAdminService
 {
+
     private readonly UserManager<ApplicationUser> _userManager = userManager;
     private readonly IConfiguration _configuration = configuration;
+
+
 
     public async Task ChangePasswordAsync(ChangePasswordUser changePasswordUser)
     {
@@ -35,6 +37,7 @@ public class IdentityService(UserManager<ApplicationUser> userManager,
             throw new CustomException($"Password change failed:\n{result.Errors.ToErrorString()}");
         }
     }
+
 
     public async Task CreateAsync(RegisterUser registerUser)
     {
