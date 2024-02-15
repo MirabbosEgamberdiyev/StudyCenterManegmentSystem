@@ -10,6 +10,5 @@ namespace Domain.Entities.Identity
         [StringLength(50)]
         public string? LastName { get; set; }
 
-        // Your custom properties here
     }
 }
