@@ -36,26 +36,6 @@ public class IdentityService(UserManager<ApplicationUser> userManager,
         }
     }
 
-    public async Task CreateAsync(RegisterUser registerUser)
-    {
-        if (registerUser is null)
-        {
-            throw new ArgumentNullException(nameof(registerUser));
-        }
-
-        var user = registerUser.ToApplicationUser();
-
-        var result = await _userManager.CreateAsync(user, registerUser.Password);
-        if (!result.Succeeded)
-        {
-            throw new CustomException($"User creation failed:\n{result.Errors.ToErrorString()}");
-        }
-
-        foreach (var role in registerUser.Roles)
-        {
-            await _userManager.AddToRoleAsync(user, role);
-        }
-    }
 
     public async Task DeleteAccountAsync(LoginUser loginUser)
     {

@@ -39,26 +39,7 @@ public class AuthController(IIdentityService identityService)
         }
     }
 
-    [HttpPost("register")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Register(RegisterUser registerUser)
-    {
-        try
-        {
-            await _identityService.CreateAsync(registerUser);
-            return Ok();
-        }
-        catch (CustomException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
+
 
     [HttpPatch("change-password")]
     [Authorize]
