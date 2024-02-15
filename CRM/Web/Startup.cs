@@ -52,7 +52,7 @@ namespace Web
 
             #region DbContext
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("StudyCenterManegmentSystem")));
 
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

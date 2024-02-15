@@ -1,4 +1,5 @@
-﻿using Application.Common.Exceptions;
+﻿using Application.Common.Constants;
+using Application.Common.Exceptions;
 using Application.DTOs.ApplicationUserDtos;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -8,12 +9,10 @@ namespace Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AuthController(IIdentityService identityService)
-    : ControllerBase
+public class AdminController(IAdminService adminService) : ControllerBase
 {
-    private readonly IIdentityService _identityService = identityService;
-
-    [HttpPost("login")]
+    private readonly IAdminService _adminService = adminService;
+    [HttpPost("login-admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -22,7 +21,7 @@ public class AuthController(IIdentityService identityService)
     {
         try
         {
-            var result = await _identityService.LoginAsync(loginUser);
+            var result = await _adminService.LoginAsync(loginUser);
             return Ok(result);
         }
         catch (CustomException ex)
@@ -39,15 +38,16 @@ public class AuthController(IIdentityService identityService)
         }
     }
 
-    [HttpPost("register")]
+    [HttpPost("create-admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Authorize(Roles = IdentityRoles.SUPER_ADMIN)]
     public async Task<IActionResult> Register(RegisterUser registerUser)
     {
         try
         {
-            await _identityService.CreateAsync(registerUser);
+            await _adminService.CreateAsync(registerUser);
             return Ok();
         }
         catch (CustomException ex)
@@ -60,8 +60,7 @@ public class AuthController(IIdentityService identityService)
         }
     }
 
-    [HttpPatch("change-password")]
-    [Authorize]
+    [HttpPatch("change-admin-password")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -71,7 +70,7 @@ public class AuthController(IIdentityService identityService)
     {
         try
         {
-            await _identityService.ChangePasswordAsync(changePasswordUser);
+            await _adminService.ChangePasswordAsync(changePasswordUser);
             return Ok();
         }
         catch (CustomException ex)
@@ -88,8 +87,7 @@ public class AuthController(IIdentityService identityService)
         }
     }
 
-    [HttpDelete("delete-account")]
-    [Authorize]
+    [HttpDelete("delete-admin-account")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -99,7 +97,35 @@ public class AuthController(IIdentityService identityService)
     {
         try
         {
-            await _identityService.DeleteAccountAsync(deleteAccountUser);
+            await _adminService.DeleteAccountAsync(deleteAccountUser);
+            return Ok();
+        }
+        catch (CustomException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
+
+    [HttpDelete("logout-admin-account")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> LogoutAccount(LogoutUser logoutUser)
+    {
+        try
+        {
+            await _adminService.LogoutAsync(logoutUser);
             return Ok();
         }
         catch (CustomException ex)
