@@ -1,7 +1,6 @@
-﻿namespace Application.DTOs
+﻿namespace Application.DTOs;
+
+public abstract class BaseDto
 {
-    public abstract class BaseDto
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

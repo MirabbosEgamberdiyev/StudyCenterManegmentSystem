@@ -9,8 +9,8 @@ public static class XonaValidator
         string.IsNullOrEmpty(xona.XonaName) &&
         xona.Sigimi > 0 &&
         xona.Qavat > 0;
-    public static bool IsExist(this Xona xona, List<Xona> xonas)
-        => xonas.Any(x => x.XonaName == xona.XonaName &&
+    public static bool IsExist(this Xona xona, IEnumerable<Xona> xonalar)
+        => xonalar.Any(x => x.XonaName == xona.XonaName &&
                           x.Sigimi == xona.Sigimi &&
                           x.Qavat == xona.Qavat &&
                           x.Id != xona.Id);
