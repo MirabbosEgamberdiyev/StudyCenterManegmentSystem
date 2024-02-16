@@ -1,9 +1,13 @@
 ﻿#region Usings
 using Application.Common.Constants;
+using Application.DTOs.Mappers;
 using Application.Interfaces;
 using Application.Services;
+using AutoMapper;
 using Domain.Entities.Identity;
 using Infrastructure.Data;
+using Infrastructure.Interfaces;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -105,9 +109,22 @@ namespace Web
             });
             #endregion
 
+            #region Mapper
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+            #endregion
+
             #region Application services
 
             builder.Services.AddScoped<IIdentityService, IdentityService>();
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<IXonaInterface, XonaReporitory>();
+            builder.Services.AddTransient<IXonaService, XonaService>();
 
             #endregion
         }
