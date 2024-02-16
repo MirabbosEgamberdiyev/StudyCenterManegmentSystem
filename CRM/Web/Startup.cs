@@ -150,7 +150,7 @@ namespace Web
             {
                 new IdentityRole { Name = IdentityRoles.SUPER_ADMIN },
                 new IdentityRole { Name = IdentityRoles.ADMIN },
-                new IdentityRole { Name = IdentityRoles.USER }
+                new IdentityRole { Name = IdentityRoles.Teacher }
             };
 
             var roleExists = roleManager.Roles.Any();

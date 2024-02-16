@@ -9,5 +9,4 @@ public interface IAdminService
     Task LogoutAsync(LogoutUser logoutUser);
     Task ChangePasswordAsync(ChangePasswordUser changePasswordUser);
     Task DeleteAccountAsync(LoginUser loginUser);
-
 }

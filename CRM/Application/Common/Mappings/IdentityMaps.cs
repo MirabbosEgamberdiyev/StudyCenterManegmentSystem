@@ -17,5 +17,7 @@ namespace Application.Common.Mappings
                 EmailConfirmed = false,
             };
         }
+
+   
     }
 }
