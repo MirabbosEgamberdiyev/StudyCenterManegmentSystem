@@ -1,10 +1,10 @@
-﻿using Application.DTOs.FanDtos;
+﻿using Application.DTOs.ApplicationUserDtos;
+using Application.DTOs.FanDtos;
 using Application.DTOs.GuruhDtos;
 using Application.DTOs.TalabaDtos;
 using Application.DTOs.TalabaGuruhDavomatDtos;
 using Application.DTOs.TalabaGuruhDtos;
 using Application.DTOs.TalabaTolovDtos;
-using Application.DTOs.TeacherDtos;
 using Application.DTOs.TeacherFanDtos;
 using Application.DTOs.XonaDtos;
 using AutoMapper;
@@ -46,9 +46,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdateTalabaTolovDto, TalabaTolov>();
 
 
-        CreateMap<AddTeacherDto, Teacher>();
-        CreateMap<TeacherDto, Teacher>().ReverseMap();
-        CreateMap<UpdateTeacherDto, Teacher>();
+  
 
 
         CreateMap<AddTeacherFanDto, TeacherFan>();
