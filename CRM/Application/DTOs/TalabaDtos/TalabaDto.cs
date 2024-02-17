@@ -1,5 +1,5 @@
 ﻿namespace Application.DTOs.TalabaDtos;
 
-public class TalabaDto
+public class TalabaDto : BaseDto
 {
 }
