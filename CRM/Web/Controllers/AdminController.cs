@@ -12,7 +12,7 @@ namespace Web.Controllers;
 public class AdminController(IAdminService adminService) : ControllerBase
 {
     private readonly IAdminService _adminService = adminService;
-    [HttpPost("login-teacher")]
+    [HttpPost("login-admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -38,7 +38,7 @@ public class AdminController(IAdminService adminService) : ControllerBase
         }
     }
 
-    [HttpPost("create-teacher")]
+    [HttpPost("create-admin")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -60,7 +60,7 @@ public class AdminController(IAdminService adminService) : ControllerBase
         }
     }
 
-    [HttpPatch("change-teacher-password")]
+    [HttpPatch("change-admin-password")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -87,7 +87,7 @@ public class AdminController(IAdminService adminService) : ControllerBase
         }
     }
 
-    [HttpDelete("delete-teacher-account")]
+    [HttpDelete("delete-admin-account")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -115,7 +115,7 @@ public class AdminController(IAdminService adminService) : ControllerBase
     }
 
 
-    [HttpDelete("logout-teacher-account")]
+    [HttpDelete("logout-admin-account")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
