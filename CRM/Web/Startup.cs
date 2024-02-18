@@ -122,6 +122,7 @@ namespace Web
             #region Application services
 
             builder.Services.AddScoped<IIdentityService, IdentityService>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
             builder.Services.AddTransient<IXonaInterface, XonaReporitory>();
             builder.Services.AddTransient<IXonaService, XonaService>();
